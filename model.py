@@ -29,4 +29,4 @@ model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=
 # fit model
 history = model.fit(X, y, batch_size = 10, epochs=13, verbose=1, validation_split = 0.2)
 # evaluate the model
-model.save("wh3.model")
+model.save("wh.model")

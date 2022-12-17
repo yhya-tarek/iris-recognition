@@ -10,9 +10,6 @@ import numpy as np
 from tkinter import *
 from PIL import Image, ImageTk
 from tensorflow import keras
-from sklearn.preprocessing import Normalizer
-
-
 
 root = Tk()
 root.title("IRIS RECOGNITION")
@@ -60,7 +57,7 @@ def predict():
     X = X.flatten()
     X = np.array(X)
     X = X.reshape(1, 10000, -1)
-    model = keras.models.load_model('C:/Users/yhya2/Desktop/applicatonWithGui/wh.model')
+    model = keras.models.load_model('iris-recognition\wh.model')
     prediction = model.predict(X)
     l = Label(root, text = f"the result : {np.argmax(prediction)}",fg='black')
     l.config(font =("Courier", 22))
