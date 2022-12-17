@@ -57,7 +57,7 @@ def predict():
     X = X.flatten()
     X = np.array(X)
     X = X.reshape(1, 10000, -1)
-    model = keras.models.load_model('iris-recognition\wh.model')
+    model = keras.models.load_model('wh.model')
     prediction = model.predict(X)
     l = Label(root, text = f"the result : {np.argmax(prediction)}",fg='black')
     l.config(font =("Courier", 22))
