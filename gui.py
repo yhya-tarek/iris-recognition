@@ -14,7 +14,10 @@ from tensorflow import keras
 root = Tk()
 root.title("IRIS RECOGNITION")
 l = Label(root, text = "IRIS RECOGINTION SYSTEM",fg='black')
+Prediction = Label(root)
 l.config(font =("Courier", 22))
+
+firstLabel = False
 
 l.pack()
 root.geometry("1000x800")
@@ -25,7 +28,7 @@ def open():
     global my_image
     global my_image_label
     root.filename = filedialog.askopenfilename(
-        initialdir="/", title="Select a File", filetypes=(("png files", ".png"), ("all files", ".*")))
+        initialdir="/", title="Select a File", filetypes=(("bmp files", ".bmp"), ("all files", ".*")))
     my_label = Label(root, text='Input Image').pack()
     my_image = PhotoImage(file=root.filename).subsample(1)
     my_image_label = Label(image=my_image).place(x=180, y=60).pack()
@@ -52,6 +55,8 @@ def featureExtraction():
     label2.place(x=500, y=360)
 
 def predict():
+    global firstLabel
+
     X, _ = IrisSeg(root.filename)
 
     X = X.flatten()
@@ -59,10 +64,14 @@ def predict():
     X = X.reshape(1, 10000, -1)
     model = keras.models.load_model('wh.model')
     prediction = model.predict(X)
-    l = Label(root, text = f"the result : {np.argmax(prediction)}",fg='black')
-    l.config(font =("Courier", 22))
-    l.pack()
-    l.place(x = 300,y = 700)
+    if not firstLabel:
+      firstLabel = True
+      Prediction.config(text = "Access Granted" if np.argmax(prediction) else "Access Denied",fg='black')
+    else :
+      Prediction.config(text = "Access Granted" if np.argmax(prediction) else "Access Denied",fg='black')
+    Prediction.config(font =("Courier", 22))
+    Prediction.pack()
+    Prediction.place(x = 300,y = 700)
 
 
 my_btn = Button(root, text="Browse Image", command=open, width=20).place(x=20,y=30)
