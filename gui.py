@@ -28,7 +28,7 @@ def open():
     global my_image
     global my_image_label
     root.filename = filedialog.askopenfilename(
-        initialdir="/", title="Select a File", filetypes=(("bmp files", ".bmp"), ("all files", ".*")))
+        initialdir="MMU Iris Database", title="Select a File", filetypes=(("bmp files", ".bmp"), ("all files", ".*")))
     my_label = Label(root, text='Input Image').pack()
     my_image = PhotoImage(file=root.filename).subsample(1)
     my_image_label = Label(image=my_image).place(x=180, y=60).pack()
@@ -67,7 +67,7 @@ def predict():
     if not firstLabel:
       firstLabel = True
       Prediction.config(text = "Access Granted" if np.argmax(prediction) else "Access Denied",fg='black')
-    else :
+    else:
       Prediction.config(text = "Access Granted" if np.argmax(prediction) else "Access Denied",fg='black')
     Prediction.config(font =("Courier", 22))
     Prediction.pack()
@@ -76,7 +76,7 @@ def predict():
 
 my_btn = Button(root, text="Browse Image", command=open, width=20).place(x=20,y=30)
 
-my_btn1 = Button(root, text='Feature Extraction',command=featureExtraction, width=20).place(x=20, y=320)
-my_btn1 = Button(root, text='show Result', width=20, command = predict).place(x=20, y=720)
+my_btn1 = Button(root, text='Preprocess The Image',command=featureExtraction, width=20).place(x=20, y=320)
+my_btn1 = Button(root, text='Get Access', width=20, command = predict).place(x=20, y=720)
 root.mainloop()
 

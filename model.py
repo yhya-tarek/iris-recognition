@@ -1,8 +1,10 @@
 import pickle
 import neptune.new as neptune
 from tensorflow import keras
+import tensorflow as tf
 from keras.layers import Dense, Activation, Flatten, Dropout
 from sklearn.model_selection import train_test_split
+tf.random.set_seed(1234)
 
 pickle_in = open("X1.pickle", "rb")
 X = pickle.load(pickle_in)
@@ -27,6 +29,6 @@ model.add(Activation('softmax'))
 
 model.compile(loss='sparse_categorical_crossentropy', optimizer='adam', metrics=['accuracy', 'mse'])
 # fit model
-history = model.fit(X, y, batch_size = 10, epochs=4, verbose=1)
+history = model.fit(X, y, batch_size = 10, epochs=10, verbose=1)
 # evaluate the model
 model.save("wh.model")
